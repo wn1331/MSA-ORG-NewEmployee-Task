@@ -18,16 +18,16 @@ function OrderForm() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         //네비게이션 제거하고 아래거 주석해제
-        navigate("/payment");
+        // navigate("/payment");
         //아래거 잠깐 주석처리 함
-        // try {
-        //     const response = await axios.post('http://localhost:8080/kafka/send', { orderName, count });
-        //     console.log(response.data);
-        //     const paymentPageUrl = response.data;
-        //     navigate(paymentPageUrl);
-        // } catch (error) {
-        //     console.error(error);
-        // }
+        try {
+            const response = await axios.post('/api1/send', { orderName, count });
+            console.log(response.data);
+            const paymentPageUrl = response.data;
+            navigate(paymentPageUrl);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
