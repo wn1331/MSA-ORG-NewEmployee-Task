@@ -14,7 +14,8 @@ import static jakarta.persistence.FetchType.*;
 @Getter
 public class OrderItem extends BaseEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_item_id")
     private Long id;
 
@@ -27,10 +28,12 @@ public class OrderItem extends BaseEntity {
     private Item item;
 
     private int price;
+    private int count;
 
     private OrderItem(Item item, int count) {
         this.item = item;
         this.price = item.getPrice() * count;
+        this.count = count;
         item.removeStock(count);
     }
 
