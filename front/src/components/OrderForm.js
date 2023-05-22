@@ -21,10 +21,9 @@ function OrderForm() {
         // navigate("/payment");
         //아래거 잠깐 주석처리 함
         try {
-            const response = await axios.post('/api1/send', { orderName, count });
-            console.log(response.data);
-            const paymentPageUrl = response.data;
-            navigate(paymentPageUrl);
+            const response = await axios.post('/api1/v1/orders', { orderName, count });
+            const orderData = response.data;
+            navigate("/payment",{state:orderData});
         } catch (error) {
             console.error(error);
         }

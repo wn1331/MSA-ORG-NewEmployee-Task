@@ -1,23 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import {useLocation} from "react-router-dom";
 
 function PayForm(){
     const [product, setProduct] = useState('');
     const [paymentInfo, setPaymentInfo] = useState('');
 
-    const handleProductChange = (e) => {
-        setProduct(e.target.value);
-    };
-
-    const handlePaymentInfoChange = (e) => {
-        setPaymentInfo(e.target.value);
-    };
+    const location = useLocation();
+    const orderData = location.state;
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         // 주문 정보를 서버로 전송
-        axios.post('http://localhost:8081/purchasePost', { product, paymentInfo })
+        axios.post('/api2/v1/payments', { product, paymentInfo })
             .then((response) => {
                 console.log('결제가 성공적으로 처리되었습니다.');
                 // 결제 성공 시 여기에 로직 쓰면됨
@@ -38,20 +34,21 @@ function PayForm(){
             <div>
                 <label htmlFor="product">주문 상품명:</label>
                 <input
-                    type="text"
                     id="product"
-                    value={product}
-                    onChange={handleProductChange}
+                    value={orderData.orderId}
+                    readOnly={orderData.orderId}
+                    style={{ border: 'none', outline: 'none' }}
                 />
             </div>
             <br/><br/><br/>
             <div>
-                <label htmlFor="paymentInfo">결제 정보:</label>
+                <label htmlFor="paymentInfo">결제 가격:</label>
                 <input
                     type="text"
                     id="paymentInfo"
-                    value={paymentInfo}
-                    onChange={handlePaymentInfoChange}
+                    value={orderData.totalPrice}
+                    readOnly={orderData.orderId}
+                    style={{ border: 'none', outline: 'none' }}
                 />
             </div>
             <br/><br/><br/>
