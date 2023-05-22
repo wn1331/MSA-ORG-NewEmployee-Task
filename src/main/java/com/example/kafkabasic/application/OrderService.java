@@ -39,6 +39,7 @@ public class OrderService {
         OrderPaymentEvent paymentEvent = new OrderPaymentEvent(order.getId(), orderItem.getPrice());
         paymentProducerService.send("order-payment-topic", paymentEvent);
 
-        return new OrderResponseDto(ResponseStatus.SUCCESS_ORDER);
+        // orderItem -> 주문서
+        return new OrderResponseDto(order.getId(), orderItem.getItem().getName(), orderItem.getCount(), orderItem.getPrice());
     }
 }
