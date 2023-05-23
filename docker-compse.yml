@@ -15,3 +15,10 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+    - "9090:9090"
+    volumes:
+      - /Users/kimjongchan/study/kafka-basic/prometheus.yml:/etc/prometheus/prometheus.yml
