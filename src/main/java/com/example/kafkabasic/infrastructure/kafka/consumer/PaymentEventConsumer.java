@@ -21,12 +21,16 @@ public class PaymentEventConsumer {
     public void consumePaymentEvent(String orderPaymentEvent) {
         log.info("Consumed message : {}", orderPaymentEvent);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(DeserializationFeature.USE_LONG_FOR_INTS);
         try {
-            OrderPaymentEvent event = objectMapper.readValue(orderPaymentEvent, OrderPaymentEvent.class);
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            String ope = objectMapper.readValue(orderPaymentEvent, String.class);
+            OrderPaymentEvent event = objectMapper.readValue(ope,OrderPaymentEvent.class);
+            System.out.println(event.toString());
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            // 역직렬화 오류 처리 로직을 추가합니다.
+            log.error("Error deserializing OrderPaymentEvent: {}", e.getMessage());
         }
     }
 }
+
