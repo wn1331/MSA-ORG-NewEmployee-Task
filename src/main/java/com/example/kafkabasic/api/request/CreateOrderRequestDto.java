@@ -1,4 +1,4 @@
 package com.example.kafkabasic.api.request;
 
-public record CreateOrderRequestDto(String orderName, int count) {
+public record CreateOrderRequestDto(String itemName, int count) {
 }

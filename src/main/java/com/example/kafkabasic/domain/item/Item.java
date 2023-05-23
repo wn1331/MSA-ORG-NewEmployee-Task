@@ -7,7 +7,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import static com.example.kafkabasic.global.error.OrderErrorCode.*;
+import static com.example.kafkabasic.global.error.OrderErrorCode.NOT_ENOUGH;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
