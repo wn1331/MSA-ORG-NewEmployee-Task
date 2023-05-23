@@ -1,3 +1,4 @@
+/*
 package com.example.kafkabasic.infrastructure.kafka.producer;
 
 import com.example.kafkabasic.application.event.OrderPaymentEvent;
@@ -11,3 +12,4 @@ public class PaymentProducerService extends AbstractKafkaMessage<OrderPaymentEve
         super(kafkaTemplate);
     }
 }
+*/
