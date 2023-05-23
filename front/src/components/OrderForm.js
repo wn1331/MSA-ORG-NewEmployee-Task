@@ -3,7 +3,7 @@ import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 
 function OrderForm() {
-    const [orderName, setSelectedProduct] = useState('');
+    const [itemName, setSelectedProduct] = useState('');
     const [count, setQuantity] = useState('');
     const navigate = useNavigate();
     const [productOptions, setProductOptions] = useState([]);
@@ -40,7 +40,7 @@ function OrderForm() {
         // navigate("/payment");
         //아래거 잠깐 주석처리 함
         try {
-            const response = await axios.post('/api1/v1/orders', {orderName, count});
+            const response = await axios.post('/api1/v1/orders', {itemName, count});
             const orderData = response.data;
             navigate("/payment", {state: orderData});
         } catch (error) {
@@ -52,7 +52,7 @@ function OrderForm() {
         <form onSubmit={handleSubmit}>
             <label>
                 주문 상품:
-                <select className="select-box" value={orderName} onChange={handleProductChange}>
+                <select className="select-box" value={itemName} onChange={handleProductChange}>
                     <option value="">상품을 선택하세요</option>
                     {productOptions.map((option) => (
                         <option key={option.value} value={option.value}>
