@@ -1,6 +1,6 @@
-package com.example.kafkabasic.infrastructure;
+package com.example.kafkabasic.infrastructure.kafka.producer;
 
-import com.example.kafkabasic.application.OrderPaymentEvent;
+import com.example.kafkabasic.application.event.OrderPaymentEvent;
 import com.example.kafkabasic.infrastructure.kafka.AbstractKafkaMessage;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;

@@ -2,6 +2,7 @@ package com.example.kafkabasic.application;
 
 import com.example.kafkabasic.api.request.CreateOrderRequestDto;
 import com.example.kafkabasic.api.response.OrderResponseDto;
+import com.example.kafkabasic.application.event.OrderPaymentEvent;
 import com.example.kafkabasic.domain.item.Item;
 import com.example.kafkabasic.domain.item.ItemRepository;
 import com.example.kafkabasic.domain.order.Order;
@@ -9,8 +10,7 @@ import com.example.kafkabasic.domain.order.OrderItem;
 import com.example.kafkabasic.domain.order.OrderItemRepository;
 import com.example.kafkabasic.domain.order.OrderRepository;
 import com.example.kafkabasic.global.error.exception.OrderException;
-import com.example.kafkabasic.global.response.ResponseStatus;
-import com.example.kafkabasic.infrastructure.PaymentProducerService;
+import com.example.kafkabasic.infrastructure.kafka.producer.PaymentProducerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,6 +1,6 @@
 package com.example.kafkabasic.global.config;
 
-import com.example.kafkabasic.application.OrderPaymentEvent;
+import com.example.kafkabasic.application.event.OrderPaymentEvent;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;

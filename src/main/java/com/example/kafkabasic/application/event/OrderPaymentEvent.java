@@ -1,4 +1,4 @@
-package com.example.kafkabasic.application;
+package com.example.kafkabasic.application.event;
 
 public record OrderPaymentEvent(Long orderId, int price) {
 }

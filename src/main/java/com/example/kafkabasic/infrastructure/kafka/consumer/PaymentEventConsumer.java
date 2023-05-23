@@ -1,10 +1,9 @@
-package com.example.kafkabasic.infrastructure.kafka;
+package com.example.kafkabasic.infrastructure.kafka.consumer;
 
-import com.example.kafkabasic.application.OrderPaymentEvent;
+import com.example.kafkabasic.application.event.OrderPaymentEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Component
 @Slf4j
