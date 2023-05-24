@@ -42,7 +42,8 @@ public class PaymentService {
             log.info("결제 성공");
         } catch (PaymentException e) {
             log.warn("결제 실패: {}", e.getPaymentErrorCode().getErrorMessage());
-            payEventProducer.send("payment failed", new PaymentProducerEvent(request.orderId()));
+            payEventProducer.send("payment-failed", new PaymentProducerEvent(request.orderId()));
+            throw new PaymentException(PaymentErrorCode.WITHDRAW_AMOUNT_EXCEEDS_LIMIT);
         }
 
         return new PaymentResponseDto();
