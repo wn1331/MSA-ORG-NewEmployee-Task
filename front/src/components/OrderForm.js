@@ -83,7 +83,7 @@ function OrderForm() {
             <br/>
             <h1>Node-exporter Scrape Time</h1>
             <iframe src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&refresh=5s&theme=light&panelId=40"
-                    width="450" height="200" frameBorder="0" title={"node-exporter"}></iframe>
+                    width="450" height="200" frameBorder="0" title={"Node"}></iframe>
             {isFailureModalOpen && (
                 <div className="modal-overlay">
                     <div className="modal">
