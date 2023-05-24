@@ -19,9 +19,6 @@ public class PaymentController {
 
     @PostMapping("/payments")
     public ResponseEntity<PaymentResponseDto> createPayment(@RequestBody CreatePaymentRequestDto request) {
-        System.out.println("api2(8081포트) 인식 완료  : "+request.toString());
-        paymentService.createPayment(request);
-
-        return ResponseEntity.ok(new PaymentResponseDto());
+        return ResponseEntity.ok(paymentService.createPayment(request));
     }
 }

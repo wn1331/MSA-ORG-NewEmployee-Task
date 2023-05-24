@@ -5,7 +5,7 @@ import lombok.Getter;
 
 
 @Getter
-public class PaymentException extends RuntimeException{
+public class PaymentException extends RuntimeException {
 
     private PaymentErrorCode paymentErrorCode;
     private String message;
