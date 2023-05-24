@@ -26,7 +26,7 @@ services:
     ports:
     - "9090:9090"
     volumes:
-      - "/Users/kimjongchan/study/kafka-basic/prometheus.yml:/etc/prometheus/prometheus.yml"
+      - "/Users/jujonghun/Desktop/orderapi/prometheus.yml:/etc/prometheus/prometheus.yml"
 
   # grafana image
   grafana:
@@ -34,6 +34,8 @@ services:
     container_name: grafana
     ports:
       - "80:3000"
+    volumes:
+      - "/Users/jujonghun/Desktop/orderapi/grafana.ini:/etc/grafana/grafana.ini"
 
   # node-exporter image
   node-exporter:
