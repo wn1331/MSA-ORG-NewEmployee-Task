@@ -25,6 +25,7 @@ public class OrderService {
     private final OrderItemRepository orderItemRepository;
     private final OrderKafkaProducer paymentKafkaProducer;
 
+    // 주문 생성과 관련된 작업
     @Transactional
     public OrderResponseDto createOrder(CreateOrderRequestDto request) {
         Item item = itemRepository.findByName(request.itemName()).orElseThrow(() -> new OrderException(NOT_FOUND));
@@ -35,11 +36,14 @@ public class OrderService {
         Order order = Order.createOrder(orderItem);
         orderRepository.save(order);
 
-        // kafKa
-        OrderProducerEvent paymentEvent = new OrderProducerEvent(order.getId(), orderItem.getPrice());
-        paymentKafkaProducer.send("order-payment-topic", paymentEvent);
+        sendOrderEvent(order, orderItem);
 
-        // orderItem -> 주문서
         return new OrderResponseDto(order.getId(), orderItem.getItem().getName(), orderItem.getCount(), orderItem.getPrice());
     }
+
+    private void sendOrderEvent(Order order, OrderItem orderItem) {
+        OrderProducerEvent paymentEvent = new OrderProducerEvent(order.getId(), orderItem.getPrice());
+        paymentKafkaProducer.send("order-payment-topic", paymentEvent);
+    }
+
 }

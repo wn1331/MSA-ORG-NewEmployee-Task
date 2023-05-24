@@ -19,7 +19,6 @@ public class OrderEventConsumer {
             ObjectMapper objectMapper = new ObjectMapper();
             String ope = objectMapper.readValue(paymentProducerEvent, String.class);
             OrderConsumerEvent event = objectMapper.readValue(ope, OrderConsumerEvent.class);
-            System.out.println(event.toString());
         } catch (JsonProcessingException e) {
             log.error("Error deserializing OrderPaymentEvent: {}", e.getMessage());
         }
