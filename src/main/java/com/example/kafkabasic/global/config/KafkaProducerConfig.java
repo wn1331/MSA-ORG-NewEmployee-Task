@@ -1,6 +1,5 @@
 package com.example.kafkabasic.global.config;
 
-import com.example.kafkabasic.application.event.OrderPaymentEvent;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;

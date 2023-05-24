@@ -14,7 +14,7 @@ import java.util.Map;
 
 @Configuration
 public class KafkaConsumerConfig {
-    
+
     @Value("${spring.kafka.consumer.group-id}")
     private String groupId;
 

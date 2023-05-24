@@ -18,7 +18,7 @@ public class ItemController {
     private final ItemService itemService;
 
     @GetMapping("/items")
-    public ResponseEntity<List<ItemResponseDto>> getItems(){
+    public ResponseEntity<List<ItemResponseDto>> getItems() {
         return ResponseEntity.ok(itemService.findAllItems());
     }
 }
