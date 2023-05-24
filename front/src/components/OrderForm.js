@@ -69,13 +69,14 @@ function OrderForm() {
 
             <h1>CPU</h1>
             <iframe
-                src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1684901537318&to=1684901837319&refresh=5s&panelId=77"
-                width="450" height="200" frameBorder="0" title={"grafana-cpu"}></iframe>
+                src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1684907635108&to=1684907935108&refresh=5s&theme=light&panelId=3"
+                width="450" height="200" frameBorder="0" title={"cpu"}></iframe>
             <br/>
             <h1>Node-exporter Scrape Time</h1>
             <iframe
-                src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1684901542285&to=1684902442285&panelId=40"
-                width="450" height="200" frameBorder="0" title={"Node-exporter Scrape Time"}></iframe>
+                src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1684907459588&to=1684907759588&refresh=5s&theme=light&panelId=40"
+                width="450" height="200" frameBorder="0" title={"Node-exporter"}></iframe>
+
 
         </form>
     );

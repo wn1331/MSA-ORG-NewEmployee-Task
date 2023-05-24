@@ -2,7 +2,7 @@ import React from 'react';
 
 class PayConfirmModal extends React.Component {
     render() {
-        const { onClose, onConfirm } = this.props;
+        const { onConfirm } = this.props;
 
         return (
             <div className="modal">
@@ -15,3 +15,5 @@ class PayConfirmModal extends React.Component {
         );
     }
 }
+
+export default PayConfirmModal;
