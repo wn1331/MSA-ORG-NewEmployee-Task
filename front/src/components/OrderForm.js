@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import '../style/OrderForm.css'; // Import the CSS file for the component
 
 function OrderForm() {
     const [itemName, setSelectedProduct] = useState('');
     const [count, setQuantity] = useState('');
     const navigate = useNavigate();
     const [productOptions, setProductOptions] = useState([]);
-
 
     const handleProductChange = (event) => {
         setSelectedProduct(event.target.value);
@@ -36,13 +36,10 @@ function OrderForm() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        //네비게이션 제거하고 아래거 주석해제
-        // navigate("/payment");
-        //아래거 잠깐 주석처리 함
         try {
-            const response = await axios.post('/api1/v1/orders', {itemName, count});
+            const response = await axios.post('/api1/v1/orders', { itemName, count });
             const orderData = response.data;
-            navigate("/payment", {state: orderData});
+            navigate('/payment', { state: orderData });
         } catch (error) {
             console.error(error);
         }
@@ -50,6 +47,7 @@ function OrderForm() {
 
     return (
         <form onSubmit={handleSubmit}>
+            <br /><br/><br/>
             <label>
                 주문 상품:
                 <select className="select-box" value={itemName} onChange={handleProductChange}>
@@ -61,16 +59,15 @@ function OrderForm() {
                     ))}
                 </select>
             </label>
-            <br/>
+            <br /><br/><br/>
             <label>
                 주문 수량:
-                <input  type="number" value={count} onChange={handleQuantityChange}/>
+                <input className="quantity-input" type="number" value={count} onChange={handleQuantityChange} />
             </label>
-            <br/>
-            <button type="submit">주문하기</button>
+            <br /><br/><br />
+            <button className="submit-button" type="submit">주문하기</button>
         </form>
     );
 }
 
 export default OrderForm;
-
