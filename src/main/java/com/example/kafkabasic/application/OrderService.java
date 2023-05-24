@@ -9,6 +9,7 @@ import com.example.kafkabasic.domain.order.OrderItem;
 import com.example.kafkabasic.domain.order.OrderItemRepository;
 import com.example.kafkabasic.domain.order.OrderRepository;
 import com.example.kafkabasic.global.error.exception.OrderException;
+import com.example.kafkabasic.infrastructure.kafka.event.OrderConsumerEvent;
 import com.example.kafkabasic.infrastructure.kafka.event.OrderProducerEvent;
 import com.example.kafkabasic.infrastructure.kafka.producer.OrderKafkaProducer;
 import lombok.RequiredArgsConstructor;
@@ -46,4 +47,12 @@ public class OrderService {
         paymentKafkaProducer.send("order-payment-topic", paymentEvent);
     }
 
+    @Transactional
+    public void rollbackTransaction(OrderConsumerEvent event) {
+        Long orderId = event.orderId();
+        // 주문한 수량 개수
+        OrderItem orderItem = orderItemRepository.findOrderItemByOrderById(orderId);
+        int itemCount = orderItem.getOrder().getItems().size();
+        orderItem.getItem().rollBackStock(itemCount);
+    }
 }
