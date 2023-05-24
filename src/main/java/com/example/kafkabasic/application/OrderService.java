@@ -52,7 +52,7 @@ public class OrderService {
         Long orderId = event.orderId();
         // 주문한 수량 개수
         OrderItem orderItem = orderItemRepository.findByOrderId(orderId);
-        int itemCount = orderItem.getOrder().getItems().size();
+        int itemCount = orderItem.getCount();
         orderItem.getItem().rollBackStock(itemCount);
     }
 }
