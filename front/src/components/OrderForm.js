@@ -75,15 +75,15 @@ function OrderForm() {
                 <br /><br/><br />
                 <button className="submit-button" type="submit">주문하기</button><br /><br/><br /><br /><br/><br />
             </form>
-            <h1>CPU</h1>
-            <iframe
-                src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1684907635108&to=1684907935108&refresh=5s&theme=light&panelId=3"
-                width="450" height="200" frameBorder="0" title={"cpu"}></iframe>
+            <h1>CPU,RAM</h1>
+            <iframe src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&refresh=5s&theme=light&panelId=3"
+                    width="450" height="200" frameBorder="0" title={"cpu"}></iframe>
+            <iframe src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&refresh=5s&theme=light&panelId=16"
+                    width="450" height="200" frameBorder="0" title={"ram"}></iframe>
             <br/>
             <h1>Node-exporter Scrape Time</h1>
-            <iframe
-                src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1684907459588&to=1684907759588&refresh=5s&theme=light&panelId=40"
-                width="450" height="200" frameBorder="0" title={"Node-exporter"}></iframe>
+            <iframe src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&refresh=5s&theme=light&panelId=40"
+                    width="450" height="200" frameBorder="0" title={"node-exporter"}></iframe>
             {isFailureModalOpen && (
                 <div className="modal-overlay">
                     <div className="modal">
