@@ -1,14 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import '../style/OrderForm.css'; // Import the CSS file for the component
+import '../style/modal.css';
 
 function OrderForm() {
     const [itemName, setSelectedProduct] = useState('');
     const [count, setQuantity] = useState('');
     const navigate = useNavigate();
     const [productOptions, setProductOptions] = useState([]);
+    const [isFailureModalOpen, setFailureModalOpen] = useState(false);
+    const handleModalConfirm = () => {
+        setFailureModalOpen(false);
 
-
+    };
     const handleProductChange = (event) => {
         setSelectedProduct(event.target.value);
     };
@@ -36,41 +41,64 @@ function OrderForm() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        //네비게이션 제거하고 아래거 주석해제
-        // navigate("/payment");
-        //아래거 잠깐 주석처리 함
         try {
-            const response = await axios.post('/api1/v1/orders', {itemName, count});
+            const response = await axios.post('/api1/v1/orders', { itemName, count });
             const orderData = response.data;
-            navigate("/payment", {state: orderData});
+            navigate('/payment', { state: orderData });
         } catch (error) {
             console.error(error);
+            console.log("주문에 실패했습니다.")
+            setFailureModalOpen(true);
         }
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                주문 상품:
-                <select className="select-box" value={itemName} onChange={handleProductChange}>
-                    <option value="">상품을 선택하세요</option>
-                    {productOptions.map((option) => (
-                        <option key={option.value} value={option.value}>
-                            {option.label}
-                        </option>
-                    ))}
-                </select>
-            </label>
+        <div>
+            <form onSubmit={handleSubmit}>
+                <br /><br/><br/>
+                <label>
+                    주문 상품:
+                    <select className="select-box" value={itemName} onChange={handleProductChange}>
+                        <option value="">상품을 선택하세요</option>
+                        {productOptions.map((option) => (
+                            <option key={option.value} value={option.value}>
+                                {option.label}
+                            </option>
+                        ))}
+                    </select>
+                </label>
+                <br /><br/><br/>
+                <label>
+                    주문 수량:
+                    <input className="quantity-input" type="number" value={count} onChange={handleQuantityChange} />
+                </label>
+                <br /><br/><br />
+                <button className="submit-button" type="submit">주문하기</button><br /><br/><br /><br /><br/><br />
+            </form>
+            <h1>CPU</h1>
+            <iframe
+                src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1684913610832&to=1684913910832&refresh=5s&theme=light&panelId=3"
+                width="450" height="200" frameBorder="0" title={"cpy"}></iframe>
+            <iframe
+                src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&refresh=5s&theme=light&panelId=20"
+                    width="450" height="200" frameBorder="0" title={"ram"}></iframe>
             <br/>
-            <label>
-                주문 수량:
-                <input  type="number" value={count} onChange={handleQuantityChange}/>
-            </label>
-            <br/>
-            <button type="submit">주문하기</button>
-        </form>
+            <h1>Node-exporter Scrape Time</h1>
+            <iframe src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&refresh=5s&theme=light&panelId=40"
+                    width="450" height="200" frameBorder="0" title={"Node"}></iframe>
+            {isFailureModalOpen && (
+                <div className="modal-overlay">
+                    <div className="modal">
+                        <div className="modal-content">
+                            <h3>주문에 실패했습니다</h3>
+                            {}
+                            <button onClick={handleModalConfirm}>확인</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
     );
 }
 
 export default OrderForm;
-
