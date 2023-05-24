@@ -1,21 +1,24 @@
-import React, {useState} from 'react';
+import React from 'react';
 import axios from 'axios';
 import {useLocation} from "react-router-dom";
 
 function PayForm() {
-    const [product, setProduct] = useState('');
-    const [paymentInfo, setPaymentInfo] = useState('');
-
     const location = useLocation();
     const orderData = location.state;
+
+    const orderId = orderData.orderId;
+    const itemName = orderData.itemName;
+    const totalPrice = orderData.totalPrice;
+
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         // 주문 정보를 서버로 전송
-        axios.post('/api2/v1/payments', {product, paymentInfo})
+        axios.post('/api2/v1/payments', {orderId, itemName, totalPrice})
             .then((response) => {
-                console.log('결제가 성공적으로 처리되었습니다.');
+                console.log('결제가 성공적으로 처리되었습니다.'+orderId+" and "+totalPrice);
                 // 결제 성공 시 여기에 로직 쓰면됨
             })
             .catch((error) => {
@@ -24,8 +27,6 @@ function PayForm() {
             });
 
         // 폼 초기화
-        setProduct('');
-        setPaymentInfo('');
     };
 
     return (
@@ -36,7 +37,7 @@ function PayForm() {
                 <input
                     id="product"
                     value={orderData.orderId}
-                    readOnly={orderData.orderId}
+                    readOnly={true}
                     style={{ border: 'none', outline: 'none' }}
                 />
             </div>
@@ -46,7 +47,7 @@ function PayForm() {
                 <input
                     id="product"
                     value={orderData.itemName}
-                    readOnly={orderData.itemName}
+                    readOnly={true}
                     style={{ border: 'none', outline: 'none' }}
                 />
             </div>
@@ -57,8 +58,8 @@ function PayForm() {
                     type="text"
                     id="paymentInfo"
                     value={orderData.totalPrice}
-                    readOnly={orderData.orderId}
-                    style={{ border: 'none', outline: 'none' }}
+                    readOnly={true}
+                    style={{ border: 'none', outline: 'none' } }
                 />
             </div>
             <br/><br/><br/>
