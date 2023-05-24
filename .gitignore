@@ -37,6 +37,7 @@ out/
 .vscode/
 
 **/application.properties
+**/grafana.ini
+**/docker-compose.yml
+**/prometheus.yml
 
-docker-compse.yml
-prometheus.yml
