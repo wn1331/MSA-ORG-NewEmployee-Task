@@ -14,3 +14,7 @@ scrape_configs:
     metrics_path: '/actuator/prometheus' # 메트릭을 수집할 path 설정
     static_configs:
       - targets: ['host.docker.internal:8080'] # 도커 인스턴스 내부 호스트:8080
+
+  - job_name: 'order-api-server' # 잡 이름
+    static_configs:
+      - targets: [ 'host.docker.internal:8080' ] # 도커 인스턴스 내부 호스트:8080
