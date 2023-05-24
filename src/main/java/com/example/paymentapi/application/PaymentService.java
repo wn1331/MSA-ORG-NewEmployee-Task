@@ -16,9 +16,11 @@ public class PaymentService {
 
     @Transactional
     public void createPayment(CreatePaymentRequestDto request){
-        if (paymentRepository.existsById(Long.valueOf(request.product()))) throw new RuntimeException("orderID already exists");
         // 예외 발생 //주문번호에 해당하는 결제가 이미 존재하는지 확인. 존재하면 예외 발생
-
+//        if (paymentRepository.existsById(request.orderId())) {
+//            throw new RuntimeException("orderID already exists");
+//        }
+        System.out.println("주문번호가 이미 존재하는지 bool값출력"+paymentRepository.existsByOrderId(request.orderId()));
         Payment payment = Payment.createPayment(request);
         paymentRepository.save(payment);
 

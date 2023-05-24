@@ -1,4 +1,4 @@
 package com.example.paymentapi.api.request;
 
-public record CreatePaymentRequestDto(String product, int paymentInfo) {
+public record CreatePaymentRequestDto(Long orderId, String itemName, int totalPrice) {
 }

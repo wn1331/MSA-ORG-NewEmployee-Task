@@ -14,13 +14,15 @@ public class Payment extends BaseEntity {
     @Column(name ="payment_id")
     private Long id;
 
-    private String orderId;
+    private Long orderId;
+    private String itemName;
     private int totalPrice;
 
     public static Payment createPayment(CreatePaymentRequestDto dto) {
         Payment payment = new Payment();
-        payment.orderId = dto.product();//주문번호
-        payment.totalPrice = dto.paymentInfo();//총금액
+        payment.orderId = dto.orderId();//주문번호
+        payment.itemName = dto.itemName();//상품명
+        payment.totalPrice = dto.totalPrice();//총금액
         return payment;
     }
 }

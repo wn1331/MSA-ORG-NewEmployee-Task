@@ -3,6 +3,7 @@ package com.example.paymentapi.global.config;
 import com.example.paymentapi.application.OrderPaymentEvent;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
@@ -16,16 +17,18 @@ import java.util.Map;
 @Configuration
 public class KafkaConsumerConfig {
 
+    @Value("${spring.kafka.consumer.group-id}")
+    private String groupId;
+
     @Bean
     public ConsumerFactory<String, String> consumerFactory() {
         Map<String, Object> configs = new HashMap<>();
         configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        configs.put(ConsumerConfig.GROUP_ID_CONFIG, "foo");
+        configs.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
         configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+        configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 
-        return new DefaultKafkaConsumerFactory<>(
-                configs);
+        return new DefaultKafkaConsumerFactory<>(configs);
     }
 
     @Bean
