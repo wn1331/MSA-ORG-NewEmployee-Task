@@ -65,7 +65,19 @@ function OrderForm() {
                 <input className="quantity-input" type="number" value={count} onChange={handleQuantityChange} />
             </label>
             <br /><br/><br />
-            <button className="submit-button" type="submit">주문하기</button>
+            <button className="submit-button" type="submit">주문하기</button><br /><br/><br /><br /><br/><br />
+
+            <h1>CPU</h1>
+            <iframe
+                src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1684907635108&to=1684907935108&refresh=5s&theme=light&panelId=3"
+                width="450" height="200" frameBorder="0" title={"cpu"}></iframe>
+            <br/>
+            <h1>Node-exporter Scrape Time</h1>
+            <iframe
+                src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1684907459588&to=1684907759588&refresh=5s&theme=light&panelId=40"
+                width="450" height="200" frameBorder="0" title={"Node-exporter"}></iframe>
+
+
         </form>
     );
 }
