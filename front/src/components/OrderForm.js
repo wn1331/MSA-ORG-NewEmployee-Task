@@ -77,13 +77,15 @@ function OrderForm() {
             </form>
             <h1>CPU</h1>
             <iframe
-                src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1684907635108&to=1684907935108&refresh=5s&theme=light&panelId=3"
-                width="450" height="200" frameBorder="0" title={"cpu"}></iframe>
+                src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1684913610832&to=1684913910832&refresh=5s&theme=light&panelId=3"
+                width="450" height="200" frameBorder="0" title={"cpy"}></iframe>
+            <iframe
+                src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&refresh=5s&theme=light&panelId=20"
+                    width="450" height="200" frameBorder="0" title={"ram"}></iframe>
             <br/>
             <h1>Node-exporter Scrape Time</h1>
-            <iframe
-                src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1684907459588&to=1684907759588&refresh=5s&theme=light&panelId=40"
-                width="450" height="200" frameBorder="0" title={"Node-exporter"}></iframe>
+            <iframe src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&refresh=5s&theme=light&panelId=40"
+                    width="450" height="200" frameBorder="0" title={"Node"}></iframe>
             {isFailureModalOpen && (
                 <div className="modal-overlay">
                     <div className="modal">
