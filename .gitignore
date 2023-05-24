@@ -37,3 +37,6 @@ out/
 .vscode/
 
 **/application.properties
+
+docker-compse.yml
+prometheus.yml
