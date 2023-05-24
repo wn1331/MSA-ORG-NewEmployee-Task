@@ -2,7 +2,6 @@ package com.example.kafkabasic.infrastructure.kafka.consumer;
 
 import com.example.kafkabasic.application.OrderService;
 import com.example.kafkabasic.infrastructure.kafka.event.OrderConsumerEvent;
-import com.example.kafkabasic.infrastructure.kafka.event.PaymentProducerEvent;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;

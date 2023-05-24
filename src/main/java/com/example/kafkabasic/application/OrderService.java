@@ -51,7 +51,7 @@ public class OrderService {
     public void rollbackTransaction(OrderConsumerEvent event) {
         Long orderId = event.orderId();
         // 주문한 수량 개수
-        OrderItem orderItem = orderItemRepository.findOrderItemByOrderById(orderId);
+        OrderItem orderItem = orderItemRepository.findByOrderId(orderId);
         int itemCount = orderItem.getOrder().getItems().size();
         orderItem.getItem().rollBackStock(itemCount);
     }
