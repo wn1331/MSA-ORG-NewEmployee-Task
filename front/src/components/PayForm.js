@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import {useLocation} from "react-router-dom";
+import { useLocation } from 'react-router-dom';
+import '../style/PayForm.css'; // Import the CSS file for the component
 
 function PayForm() {
     const location = useLocation();
@@ -10,16 +11,15 @@ function PayForm() {
     const itemName = orderData.itemName;
     const totalPrice = orderData.totalPrice;
 
-
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
         // 주문 정보를 서버로 전송
-        axios.post('/api2/v1/payments', {orderId, itemName, totalPrice})
+        axios
+            .post('/api2/v1/payments', { orderId, itemName, totalPrice })
             .then((response) => {
-                console.log('결제가 성공적으로 처리되었습니다.'+orderId+" and "+totalPrice);
-                // 결제 성공 시 여기에 로직 쓰면됨
+                console.log('결제가 성공적으로 처리되었습니다.' + orderId + ' and ' + totalPrice);
+                // 결제 성공 시 여기에 로직 쓰면 됨
             })
             .catch((error) => {
                 console.error('결제 처리 중 오류가 발생했습니다.', error);
@@ -31,27 +31,33 @@ function PayForm() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <br/><br/><br/>
+            <br />
+            <br />
+            <br />
             <div>
-                <label htmlFor="product">주문 번호:</label>
+                <label htmlFor="orderNumber">주문 번호:</label>
                 <input
-                    id="product"
+                    id="orderNumber"
                     value={orderData.orderId}
                     readOnly={true}
-                    style={{ border: 'none', outline: 'none' }}
+                    className="input-field"
                 />
             </div>
-            <br/><br/><br/>
+            <br />
+            <br />
+            <br />
             <div>
-                <label htmlFor="product">상품명:</label>
+                <label htmlFor="productName">상품명:</label>
                 <input
-                    id="product"
+                    id="productName"
                     value={orderData.itemName}
                     readOnly={true}
-                    style={{ border: 'none', outline: 'none' }}
+                    className="input-field"
                 />
             </div>
-            <br/><br/><br/>
+            <br />
+            <br />
+            <br />
             <div>
                 <label htmlFor="paymentInfo">결제 가격:</label>
                 <input
@@ -59,15 +65,19 @@ function PayForm() {
                     id="paymentInfo"
                     value={orderData.totalPrice}
                     readOnly={true}
-                    style={{ border: 'none', outline: 'none' } }
+                    className="input-field"
                 />
             </div>
-            <br/><br/><br/>
+            <br />
+            <br />
+            <br />
             <div>
-                <button type="submit">결제하기</button>
+                <button className="submit-button" type="submit">
+                    결제하기
+                </button>
             </div>
         </form>
     );
-};
+}
 
 export default PayForm;
