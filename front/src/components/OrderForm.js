@@ -75,12 +75,10 @@ function OrderForm() {
                 <br /><br/><br />
                 <button className="submit-button" type="submit">주문하기</button><br /><br/><br /><br /><br/><br />
             </form>
-            <h1>CPU</h1>
-            <iframe
-                src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1684913610832&to=1684913910832&refresh=5s&theme=light&panelId=3"
-                width="450" height="200" frameBorder="0" title={"cpy"}></iframe>
-            <iframe
-                src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&refresh=5s&theme=light&panelId=20"
+            <h1>CPU,RAM</h1>
+            <iframe src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&refresh=5s&theme=light&panelId=3"
+                    width="450" height="200" frameBorder="0" title={"cpu"}></iframe>
+            <iframe src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&refresh=5s&theme=light&panelId=16"
                     width="450" height="200" frameBorder="0" title={"ram"}></iframe>
             <br/>
             <h1>Node-exporter Scrape Time</h1>
