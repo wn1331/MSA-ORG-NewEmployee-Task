@@ -16,6 +16,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static com.example.kafkabasic.global.error.OrderErrorCode.NOT_FOUND;
 
 @Service
@@ -50,18 +52,20 @@ public class OrderService {
     @Transactional
     public void orderRollbackTransaction(OrderConsumerEvent event) {
         Long orderId = event.orderId();
-        OrderItem orderItem = orderItemRepository.findByOrderId(orderId).orElseThrow(() -> new OrderException(NOT_FOUND));
-        rollbackStock(orderItem);
-        deleteOrderItem(orderItem);
+        List<OrderItem> orderItems = orderItemRepository.findByOrderId(orderId);
+        rollbackStock(orderItems);
+        deleteOrder(orderId);
     }
 
-    private void deleteOrderItem(OrderItem orderItem) {
-        orderItemRepository.delete(orderItem);
+    private void deleteOrder(Long orderId) {
+        orderRepository.deleteById(orderId);
     }
 
-    private void rollbackStock(OrderItem orderItem) {
-        int itemCount = orderItem.getCount();
-        Item item = orderItem.getItem();
-        item.rollbackStock(itemCount);
+    private void rollbackStock(List<OrderItem> orderItems) {
+        orderItems.forEach(orderItem -> {
+            int itemCount = orderItem.getCount();
+            Item item = orderItem.getItem();
+            item.rollbackStock(itemCount);
+        });
     }
 }

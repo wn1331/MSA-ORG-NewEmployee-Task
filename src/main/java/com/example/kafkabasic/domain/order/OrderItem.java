@@ -18,7 +18,7 @@ public class OrderItem extends BaseEntity {
     @Column(name = "order_item_id")
     private Long id;
 
-    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
 
