@@ -19,7 +19,7 @@ public class InitDb {
     }
 
     private void createBankAccount() {
-        BankAccountRequestDto request = new BankAccountRequestDto(1L, 1000000L);
+        BankAccountRequestDto request = new BankAccountRequestDto(1L, 100000L);
         bankAccountService.createAccount(request);
     }
 

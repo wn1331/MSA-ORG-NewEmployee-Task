@@ -26,25 +26,37 @@ public class PaymentService {
     private final static Long TEST_MEMBER_ID = 1L;
 
     @Transactional
-    public PaymentResponseDto createPayment(CreatePaymentRequestDto request) {
+    public PaymentResponseDto paymentProcess(CreatePaymentRequestDto request) {
         // 해당 주문이 존재하는지
-        if (paymentRepository.existsByOrderId(request.orderId())) {
-            throw new PaymentException(PaymentErrorCode.ALL_READY_EXIST_ORDER);
-        }
+        validatePaymentNotExistsByOrderId(request.orderId());
 
-        // 현재는 테스트 단계이므로 변수에 미리 셋팅되어있는 값을 집어 넣음
-        BankAccount bankAccount = bankAccountRepository.findByMemberId(TEST_MEMBER_ID)
+        // 고객 계좌 찾기
+        BankAccount bankAccount = findBankAccountByMemberId(TEST_MEMBER_ID);
+
+        Payment payment = createPayment(request, bankAccount);
+        paymentRepository.save(payment);
+        log.info("결제 성공");
+        return new PaymentResponseDto();
+    }
+
+    private BankAccount findBankAccountByMemberId(Long memberId) {
+        return bankAccountRepository.findByMemberId(memberId)
                 .orElseThrow(() -> new PaymentException(PaymentErrorCode.NOT_FOUND_USER));
+    }
 
+    private Payment createPayment(CreatePaymentRequestDto request, BankAccount bankAccount) {
         try {
-            Payment payment = Payment.createPayment(request, bankAccount);
-            paymentRepository.save(payment);
-            log.info("결제 성공");
+            return Payment.createPayment(request, bankAccount);
         } catch (PaymentException e) {
             log.warn("결제 실패: {}", e.getPaymentErrorCode().getErrorMessage());
-            payEventProducer.send("payment failed", new PaymentProducerEvent(request.orderId()));
+            payEventProducer.send("payment-failed", new PaymentProducerEvent(request.orderId()));
+            throw new PaymentException(PaymentErrorCode.WITHDRAW_AMOUNT_EXCEEDS_LIMIT);
         }
+    }
 
-        return new PaymentResponseDto();
+    private void validatePaymentNotExistsByOrderId(Long orderId) {
+        if (paymentRepository.existsByOrderId(orderId)) {
+            throw new PaymentException(PaymentErrorCode.ALL_READY_EXIST_ORDER);
+        }
     }
 }
