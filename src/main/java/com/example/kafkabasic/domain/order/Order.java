@@ -22,7 +22,7 @@ public class Order extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> items = new ArrayList<>();
 
     private Order(OrderItem orderItem) {
@@ -40,4 +40,6 @@ public class Order extends BaseEntity {
     public static Order createOrder(OrderItem orderItem) {
         return new Order(orderItem);
     }
+
+
 }

@@ -40,4 +40,8 @@ public class Item extends BaseEntity {
         }
         this.stockQuantity -= count;
     }
+
+    public void rollbackStock(int itemCount) {
+        this.stockQuantity += itemCount;
+    }
 }
