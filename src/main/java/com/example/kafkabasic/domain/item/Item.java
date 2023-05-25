@@ -41,7 +41,7 @@ public class Item extends BaseEntity {
         this.stockQuantity -= count;
     }
 
-    public void rollBackStock(int itemCount) {
+    public void rollbackStock(int itemCount) {
         this.stockQuantity += itemCount;
     }
 }

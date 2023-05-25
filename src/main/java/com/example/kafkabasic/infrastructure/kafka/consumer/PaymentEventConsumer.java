@@ -25,7 +25,7 @@ public class PaymentEventConsumer {
             String pfe = objectMapper.readValue(paymentFailEvent, String.class);
             OrderConsumerEvent event = objectMapper.readValue(pfe, OrderConsumerEvent.class);
 
-            orderService.rollbackTransaction(event);
+            orderService.orderRollbackTransaction(event);
         } catch (JsonProcessingException e) {
             log.error("Error deserializing PaymentProducerEvent: {}", e.getMessage());
         }

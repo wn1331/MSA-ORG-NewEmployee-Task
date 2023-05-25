@@ -37,9 +37,9 @@ public class OrderService {
         Order order = Order.createOrder(orderItem);
         orderRepository.save(order);
 
-        sendOrderEvent(order, orderItem);
+        sendOrderEvent(order, orderItem); // 주문 완료 kafka message
 
-        return new OrderResponseDto(order.getId(), orderItem.getItem().getName(), orderItem.getCount(), orderItem.getPrice());
+        return OrderResponseDto.toDto(orderItem);
     }
 
     private void sendOrderEvent(Order order, OrderItem orderItem) {
@@ -48,11 +48,20 @@ public class OrderService {
     }
 
     @Transactional
-    public void rollbackTransaction(OrderConsumerEvent event) {
+    public void orderRollbackTransaction(OrderConsumerEvent event) {
         Long orderId = event.orderId();
-        // 주문한 수량 개수
-        OrderItem orderItem = orderItemRepository.findByOrderId(orderId);
+        OrderItem orderItem = orderItemRepository.findByOrderId(orderId).orElseThrow(() -> new OrderException(NOT_FOUND));
+        rollbackStock(orderItem);
+        deleteOrderItem(orderItem);
+    }
+
+    private void deleteOrderItem(OrderItem orderItem) {
+        orderItemRepository.delete(orderItem);
+    }
+
+    private void rollbackStock(OrderItem orderItem) {
         int itemCount = orderItem.getCount();
-        orderItem.getItem().rollBackStock(itemCount);
+        Item item = orderItem.getItem();
+        item.rollbackStock(itemCount);
     }
 }
