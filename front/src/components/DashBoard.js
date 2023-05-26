@@ -26,22 +26,22 @@ function DashBoard(){
                         <div className="col-xl-3 col-md-6">
                             <div className="card mb-4">
                                 <iframe
+                                    src="http://localhost/d-solo/v5ciIbUZz/postgresql-exporter?orgId=1&refresh=1m&theme=light&panelId=146"
+                                    width="450" height="200" frameBorder="0" title={'24124'}></iframe>
+                            </div>
+                        </div>
+                        <div className="col-xl-3 col-md-6">
+                            <div className="card mb-4">
+                                <iframe
+                                    src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&theme=light&panelId=16"
+                                    width="450" height="200" frameBorder="0" title={"2"}></iframe>
+                            </div>
+                        </div>
+                        <div className="col-xl-3 col-md-6">
+                            <div className="card mb-4">
+                                <iframe
                                     src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&theme=light&panelId=20"
-                                    width="450" height="200" frameBorder="0" title={"cpu"}></iframe>
-                            </div>
-                        </div>
-                        <div className="col-xl-3 col-md-6">
-                            <div className="card mb-4">
-                                <iframe
-                                    src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&theme=light&panelId=16"
-                                    width="450" height="200" frameBorder="0" title={"ram"}></iframe>
-                            </div>
-                        </div>
-                        <div className="col-xl-3 col-md-6">
-                            <div className="card mb-4">
-                                <iframe
-                                    src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&theme=light&panelId=16"
-                                    width="450" height="200" frameBorder="0" title={"disk"}></iframe>
+                                    width="450" height="200" frameBorder="0" title={"3"}></iframe>
                             </div>
                         </div>
                         <div className="col-xl-3 col-md-6">
@@ -57,56 +57,60 @@ function DashBoard(){
                             <div className="card mb-4">
                                 <div className="card-header">
                                     <i className="fas fa-chart-area me-1"></i>
-                                    JDBC Connection
+                                    Memory status
                                 </div>
-                                <div className="card-body"><iframe
-                                    src="http://localhost/d-solo/wdV6wx7iz/spring-boot-hikaricp-jdbc?orgId=1&refresh=5s&var-application=payment-service&var-region=All&var-instance=All&var-jdbc_connection_name=dataSource&var-hikaricp_pool_name=payment-hikari-pool&theme=light&panelId=10"
-                                    width="100%" height="400" frameBorder="0" title={"mini1"}></iframe></div>
+                                <div className="card-body">
+                                    <iframe
+                                        src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&theme=light&panelId=78"
+                                        width="100%" height="200" frameBorder="0" title={'0909'} ></iframe>
+                                </div>
                             </div>
                         </div>
                         <div className="col-xl-6">
                             <div className="card mb-4">
                                 <div className="card-header">
                                     <i className="fas fa-chart-bar me-1"></i>
-                                    HikariCP Connection
+                                    Process status
                                 </div>
-                                <div className="card-body"><iframe
-                                    src="http://localhost/d-solo/wdV6wx7iz/spring-boot-hikaricp-jdbc?orgId=1&refresh=5s&var-application=payment-service&var-region=All&var-instance=All&var-jdbc_connection_name=dataSource&var-hikaricp_pool_name=payment-hikari-pool&theme=light&panelId=10"
-                                    width="100%" height="400" frameBorder="0" title={"mini2"}></iframe></div>
+                                <div className="card-body">
+                                    <iframe
+                                        src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&theme=light&panelId=62"
+                                        width="100%" height="200" frameBorder="0" title={'666'}></iframe>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div className="card mb-4">
                         <div className="card-header">
                             <i className="fas fa-table me-1"></i>
-                            Network Status
+                            CPU Status
                         </div>
                         <div className="card-body">
                             <iframe
-                                src="http://localhost/d-solo/wdV6wx7iz/spring-boot-hikaricp-jdbc?orgId=1&refresh=5s&var-application=payment-service&var-region=All&var-instance=All&var-jdbc_connection_name=dataSource&var-hikaricp_pool_name=payment-hikari-pool&theme=light&panelId=10"
-                                width="100%" height="400" frameBorder="0" title={"hikariCP"}></iframe>
+                                src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&refresh=5s&theme=light&panelId=3"
+                                width="100%" height="400" frameBorder="0" title={'5'}></iframe>
                         </div>
                     </div>
                     <div className="card mb-4">
                         <div className="card-header">
                             <i className="fas fa-table me-1"></i>
-                            example chart1
+                            Network Traffic
                         </div>
                         <div className="card-body">
                             <iframe
-                                src="http://localhost/d-solo/wdV6wx7iz/spring-boot-hikaricp-jdbc?orgId=1&refresh=5s&var-application=payment-service&var-region=All&var-instance=All&var-jdbc_connection_name=dataSource&var-hikaricp_pool_name=payment-hikari-pool&theme=light&panelId=10"
-                                width="100%" height="400" frameBorder="0" title={"JDBCPool"}></iframe>
+                                src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&refresh=5s&theme=light&panelId=84"
+                                width="100%" height="400" frameBorder="0" title={'6'}></iframe>
                         </div>
                     </div>
                     <div className="card mb-4">
                         <div className="card-header">
                             <i className="fas fa-table me-1"></i>
-                            Example chart2
+                            Node-exporter Scrape Time
                         </div>
                         <div className="card-body">
                             <iframe
-                                src="http://localhost/d-solo/wdV6wx7iz/spring-boot-hikaricp-jdbc?orgId=1&refresh=5s&var-application=payment-service&var-region=All&var-instance=All&var-jdbc_connection_name=dataSource&var-hikaricp_pool_name=payment-hikari-pool&theme=light&panelId=10"
-                                width="100%" height="500" frameBorder="0" title={"Node-exporter"}></iframe>
+                                src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&refresh=5s&theme=light&panelId=40"
+                                width="100%" height="400" frameBorder="0" title={'7'}></iframe>
                         </div>
                     </div>
                 </div>
