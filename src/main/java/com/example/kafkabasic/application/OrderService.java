@@ -10,8 +10,6 @@ import com.example.kafkabasic.domain.order.OrderItemRepository;
 import com.example.kafkabasic.domain.order.OrderRepository;
 import com.example.kafkabasic.global.error.exception.OrderException;
 import com.example.kafkabasic.infrastructure.kafka.event.OrderConsumerEvent;
-import com.example.kafkabasic.infrastructure.kafka.event.OrderProducerEvent;
-import com.example.kafkabasic.infrastructure.kafka.producer.OrderKafkaProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,46 +24,49 @@ public class OrderService {
     private final ItemRepository itemRepository;
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
-    private final OrderKafkaProducer paymentKafkaProducer;
 
-    // 주문 생성과 관련된 작업
+    // 주문 생성
     @Transactional
     public OrderResponseDto createOrder(CreateOrderRequestDto request) {
-        Item item = itemRepository.findByName(request.itemName()).orElseThrow(() -> new OrderException(NOT_FOUND));
+        Item item = itemRepository.findByName(request.itemName())
+                .orElseThrow(() -> new OrderException(NOT_FOUND));
 
-        OrderItem orderItem = OrderItem.createOrder(item, request.count());
-        orderItemRepository.save(orderItem);
-
-        Order order = Order.createOrder(orderItem);
-        orderRepository.save(order);
-
-        sendOrderEvent(order, orderItem); // 주문 완료 kafka message
+        OrderItem orderItem = createOrderItem(request, item);
+        createOrder(orderItem);
 
         return OrderResponseDto.toDto(orderItem);
     }
 
-    private void sendOrderEvent(Order order, OrderItem orderItem) {
-        OrderProducerEvent paymentEvent = new OrderProducerEvent(order.getId(), orderItem.getPrice());
-        paymentKafkaProducer.send("order-payment-topic", paymentEvent);
+    private void createOrder(OrderItem orderItem) {
+        Order order = Order.createOrder(orderItem);
+        orderRepository.save(order);
     }
 
+    private OrderItem createOrderItem(CreateOrderRequestDto request, Item item) {
+        OrderItem orderItem = OrderItem.createOrder(item, request.count());
+        return orderItemRepository.save(orderItem);
+    }
+
+    // 주문 rollback
     @Transactional
-    public void orderRollbackTransaction(OrderConsumerEvent event) {
-        Long orderId = event.orderId();
-        List<OrderItem> orderItems = orderItemRepository.findByOrderId(orderId);
-        rollbackStock(orderItems);
-        deleteOrder(orderId);
-    }
-
-    private void deleteOrder(Long orderId) {
-        orderRepository.deleteById(orderId);
+    public void rollbackOrderTransaction(OrderConsumerEvent event) {
+        Order order = findOrderById(event.orderId());
+        order.changeFailedPayment();
+        rollbackStock(order.getItems());
     }
 
     private void rollbackStock(List<OrderItem> orderItems) {
-        orderItems.forEach(orderItem -> {
-            int itemCount = orderItem.getCount();
-            Item item = orderItem.getItem();
-            item.rollbackStock(itemCount);
-        });
+        orderItems.forEach(OrderItem::returnStock);
+    }
+
+    @Transactional
+    public void successPayment(OrderConsumerEvent event) {
+        Order order = findOrderById(event.orderId());
+        order.changeSuccessPayment();
+    }
+
+    private Order findOrderById(Long orderId) {
+        return orderRepository.findById(orderId)
+                .orElseThrow(() -> new OrderException(NOT_FOUND));
     }
 }

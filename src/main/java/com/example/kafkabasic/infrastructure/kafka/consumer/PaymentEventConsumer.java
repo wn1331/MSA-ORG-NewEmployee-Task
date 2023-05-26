@@ -16,16 +16,31 @@ public class PaymentEventConsumer {
 
     private final OrderService orderService;
 
-    @KafkaListener(topics = "payment-failed", groupId = "failevent", containerFactory = "kafkaListener")
-    public void consumePaymentEvent(String paymentFailEvent) {
-        log.info("Consumed message : {}", paymentFailEvent);
+    @KafkaListener(topics = "payment-failed", groupId = "failedEvent", containerFactory = "kafkaListener")
+    public void paymentFailedEvent(String paymentFailEvent) {
+        log.info("결제 실패 이벤트 메시지 : {}", paymentFailEvent);
 
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             String pfe = objectMapper.readValue(paymentFailEvent, String.class);
             OrderConsumerEvent event = objectMapper.readValue(pfe, OrderConsumerEvent.class);
 
-            orderService.orderRollbackTransaction(event);
+            orderService.rollbackOrderTransaction(event);
+        } catch (JsonProcessingException e) {
+            log.error("Error deserializing PaymentProducerEvent: {}", e.getMessage());
+        }
+    }
+
+    @KafkaListener(topics = "payment-success", groupId = "successEvent", containerFactory = "kafkaListener")
+    public void paymentSuccessEvent(String paymentSuccessEvent) {
+        log.info("결제 성공 이벤트 메시지 : {}", paymentSuccessEvent);
+
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String pfe = objectMapper.readValue(paymentSuccessEvent, String.class);
+            OrderConsumerEvent event = objectMapper.readValue(pfe, OrderConsumerEvent.class);
+
+            orderService.successPayment(event);
         } catch (JsonProcessingException e) {
             log.error("Error deserializing PaymentProducerEvent: {}", e.getMessage());
         }

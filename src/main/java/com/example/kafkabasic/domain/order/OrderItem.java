@@ -14,7 +14,8 @@ import static jakarta.persistence.FetchType.LAZY;
 @Getter
 public class OrderItem extends BaseEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_item_id")
     private Long id;
 
@@ -42,5 +43,9 @@ public class OrderItem extends BaseEntity {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public void returnStock() {
+        this.item.rollbackStock(this.count);
     }
 }
