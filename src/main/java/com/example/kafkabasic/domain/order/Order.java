@@ -9,13 +9,17 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.kafkabasic.domain.order.OrderPayStatus.*;
+import static com.example.kafkabasic.domain.order.OrderStatus.ORDER;
+
 @Entity
 @Table(name = "ORDERS")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class Order extends BaseEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
     private Long id;
 
@@ -25,9 +29,13 @@ public class Order extends BaseEntity {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> items = new ArrayList<>();
 
+    @Enumerated(EnumType.STRING)
+    private OrderPayStatus orderPayStatus;
+
     private Order(OrderItem orderItem) {
-        this.status = OrderStatus.ORDER;
+        this.status = ORDER;
         this.addOrderItem(orderItem);
+        this.orderPayStatus = PENDING;
     }
 
     private void addOrderItem(OrderItem orderItem) {
@@ -42,4 +50,11 @@ public class Order extends BaseEntity {
     }
 
 
+    public void changeSuccessPayment() {
+        this.orderPayStatus = COMPLETED;
+    }
+
+    public void changeFailedPayment() {
+        this.orderPayStatus = FAILED;
+    }
 }
