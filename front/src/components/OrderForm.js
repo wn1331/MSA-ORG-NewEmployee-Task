@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import '../style/OrderForm.css'; // Import the CSS file for the component
-import '../style/modal.css';
+import React, {useEffect, useState} from 'react';
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 function OrderForm() {
     const [itemName, setSelectedProduct] = useState('');
     const [count, setQuantity] = useState('');
     const navigate = useNavigate();
     const [productOptions, setProductOptions] = useState([]);
-    const [isFailureModalOpen, setFailureModalOpen] = useState(false);
-    const handleModalConfirm = () => {
-        setFailureModalOpen(false);
+    const handleDashboard = (event) => {
+        navigate('/dashboard');
+    }
 
-    };
     const handleProductChange = (event) => {
         setSelectedProduct(event.target.value);
     };
@@ -36,56 +33,64 @@ function OrderForm() {
                 console.error(error);
             }
         }
+
         fetchProductOptions();
     }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('/api1/v1/orders', { itemName, count });
+            const response = await axios.post('/api1/v1/orders', {itemName, count});
             const orderData = response.data;
-            navigate('/payment', { state: orderData });
+            navigate('/payment', {state: orderData});
         } catch (error) {
             console.error(error);
             console.log("주문에 실패했습니다.")
-            setFailureModalOpen(true);
         }
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <br /><br/><br/>
-                <label>
-                    주문 상품:
-                    <select className="select-box" value={itemName} onChange={handleProductChange}>
-                        <option value="">상품을 선택하세요</option>
-                        {productOptions.map((option) => (
-                            <option key={option.value} value={option.value}>
-                                {option.label}
-                            </option>
-                        ))}
-                    </select>
-                </label>
-                <br /><br/><br/>
-                <label>
-                    주문 수량:df
-                    <input className="quantity-input" type="number" value={count} onChange={handleQuantityChange} />
-                </label>
-                <br /><br/><br />
-                <button className="submit-button" type="submit">주문하기</button><br /><br/><br /><br /><br/><br />
-            </form>
-            {isFailureModalOpen && (
-                <div className="modal-overlay">
-                    <div className="modal">
-                        <div className="modal-content">
-                            <h3>주문에 실패했습니다</h3>
-                            {}
-                            <button onClick={handleModalConfirm}>확인</button>
-                        </div>
+        <div className="container">
+            <header>
+                <nav className="nav nav-pills pull-right">
+                    <ul className="nav nav-pills pull-right">
+                        <li><a href="/">Home</a></li>
+                    </ul>
+                </nav>
+                <a href="/">
+                    <h3 className="text-muted">ORG-I SHOP</h3>
+                </a>
+            </header>
+            <div className="jumbotron">
+                <h1>상품 주문</h1>
+                <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label htmlFor="item">상품명</label>
+                        <select name="itemId" id="item" className="form-control" value={itemName}
+                                onChange={handleProductChange}>
+                            <option value="">상품선택</option>
+                            {productOptions.map((option) => (
+                                <option key={option.value} value={option.value}>
+                                    {option.label}
+                                </option>
+                            ))}
+                        </select>
                     </div>
-                </div>
-            )}
+
+                    <div className="form-group">
+                        <label htmlFor="count">주문수량</label>
+                        <input type="number" name="count" className="form-control" id="count"
+                               placeholder="주문 수량을 입력하세요" value={count} onChange={handleQuantityChange}/>
+                    </div>
+
+                    <button type="submit" className="btn btn-primary">주문하기</button>
+                </form>
+            </div>
+
+            <div className="footer">
+                <p>ORG-I Shop</p>
+            </div>
+            <button type="button" onClick={handleDashboard}>123</button>
         </div>
     );
 }

@@ -12,7 +12,6 @@ function HomeForm() {
                 <p className="lead">주문 기능</p>
                 <p>
                     <a className="btn btn-lg btn-info" href="/order">상품 주문</a>
-                    <a className="btn btn-lg btn-info" href="/orders">주문 내역</a>
                 </p>
             </div>
 
