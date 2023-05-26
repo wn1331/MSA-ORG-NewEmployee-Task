@@ -19,6 +19,6 @@ public class PaymentController {
 
     @PostMapping("/payments")
     public ResponseEntity<PaymentResponseDto> createPayment(@RequestBody CreatePaymentRequestDto request) {
-        return ResponseEntity.ok(paymentService.paymentProcess(request));
+        return ResponseEntity.ok(paymentService.processPayment(request));
     }
 }

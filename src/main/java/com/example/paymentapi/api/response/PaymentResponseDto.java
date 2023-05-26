@@ -1,4 +1,6 @@
 package com.example.paymentapi.api.response;
 
-public record PaymentResponseDto() {
+import com.example.paymentapi.domain.payment.PayStatus;
+
+public record PaymentResponseDto(String payStatus) {
 }
