@@ -4,6 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+function importAll(r) {
+    r.keys().forEach(r);
+}
+
+importAll(require.context('./css/', true, /\.css$/));
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

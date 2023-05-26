@@ -69,21 +69,12 @@ function OrderForm() {
                 </label>
                 <br /><br/><br/>
                 <label>
-                    주문 수량:
+                    주문 수량:df
                     <input className="quantity-input" type="number" value={count} onChange={handleQuantityChange} />
                 </label>
                 <br /><br/><br />
                 <button className="submit-button" type="submit">주문하기</button><br /><br/><br /><br /><br/><br />
             </form>
-            <h1>CPU,RAM</h1>
-            <iframe src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&refresh=5s&theme=light&panelId=3"
-                    width="450" height="200" frameBorder="0" title={"cpu"}></iframe>
-            <iframe src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&refresh=5s&theme=light&panelId=16"
-                    width="450" height="200" frameBorder="0" title={"ram"}></iframe>
-            <br/>
-            <h1>Node-exporter Scrape Time</h1>
-            <iframe src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&refresh=5s&theme=light&panelId=40"
-                    width="450" height="200" frameBorder="0" title={"Node"}></iframe>
             {isFailureModalOpen && (
                 <div className="modal-overlay">
                     <div className="modal">
