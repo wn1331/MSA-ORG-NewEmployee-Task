@@ -9,7 +9,7 @@ function DashBoard(){
         document.body.appendChild(script);
     });
     return (
-        <body className="sb-nav-fixed">
+        <div className="sb-nav-fixed">
         <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a className="navbar-brand ps-3" href="/"><img
                 src="https://pds.saramin.co.kr/company/logo/202104/05/qr2abz_s6yv-j605m_logo.png" alt={"오렌지아이"} width="50"/></a>
@@ -125,7 +125,7 @@ function DashBoard(){
                 </footer>
             </div>
         </div>
-        </body>
+        </div>
     );
 }
 

@@ -7,9 +7,7 @@ function OrderForm() {
     const [count, setQuantity] = useState('');
     const navigate = useNavigate();
     const [productOptions, setProductOptions] = useState([]);
-    const handleDashboard = (event) => {
-        navigate('/dashboard');
-    }
+
 
     const handleProductChange = (event) => {
         setSelectedProduct(event.target.value);
@@ -90,7 +88,7 @@ function OrderForm() {
             <div className="footer">
                 <p>ORG-I Shop</p>
             </div>
-            <button type="button" onClick={handleDashboard}>123</button>
+            {/*<button type="button" onClick={handleDashboard}>123</button>*/}
         </div>
     );
 }
