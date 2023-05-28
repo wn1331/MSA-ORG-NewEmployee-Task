@@ -18,15 +18,15 @@ public class Payment extends BaseEntity {
     private Long id;
 
     private Long orderId;
-    private String itemName;
+
+    private PayStatus payStatus;
+
     private int totalPrice;
 
     public static Payment createPayment(CreatePaymentRequestDto dto, BankAccount account) {
         Payment payment = new Payment();
         payment.orderId = dto.orderId();//주문번호
-        payment.itemName = dto.itemName();//상품명
         payment.totalPrice = dto.totalPrice();//총금액
-
         account.withdraw(dto.totalPrice()); // 계좌에서 total price 만큼 빼줌
         return payment;
     }
