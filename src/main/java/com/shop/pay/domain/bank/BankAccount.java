@@ -8,6 +8,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import static com.shop.pay.global.error.PaymentErrorCode.*;
+
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -30,7 +32,7 @@ public class BankAccount extends BaseEntity {
 
     public void withdraw(int totalPrice) {
         if (this.deposit < totalPrice) {
-            throw new PaymentException(PaymentErrorCode.WITHDRAW_AMOUNT_EXCEEDS_LIMIT);
+            throw new PaymentException(WITHDRAW_AMOUNT_EXCEEDS_LIMIT);
         }
         this.deposit -= totalPrice;
     }
