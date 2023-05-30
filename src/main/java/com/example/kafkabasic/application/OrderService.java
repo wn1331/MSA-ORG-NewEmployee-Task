@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.kafkabasic.global.error.OrderErrorCode.NOT_FOUND;
@@ -68,5 +69,9 @@ public class OrderService {
     private Order findOrderById(Long orderId) {
         return orderRepository.findById(orderId)
                 .orElseThrow(() -> new OrderException(NOT_FOUND));
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return orderItemRepository.findAll();
     }
 }
