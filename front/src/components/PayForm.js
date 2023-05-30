@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from "axios";
+import "../style/modal.css";
 
 function PayForm({orders}) {
     const location = useLocation();
@@ -28,43 +29,18 @@ function PayForm({orders}) {
             .post('/api2/v1/payments', {orderId, totalPrice, payStatus})
             .then((response) => {
                 console.log('결제가 성공적으로 처리되었습니다.' + orderId + ' and ' + totalPrice);
-                setSuccessModalOpen(true);
+
                 setPayStatus(response.data.payStatus);
+                setSuccessModalOpen(true);
             })
             .catch((error) => {
                 console.error('결제 처리 중 오류가 발생했습니다.', error);
-                setFailureModalOpen(true);
+
                 setPayStatus("결제 실패");
+                setFailureModalOpen(true);
             });
     };
 
-    const renderModal = () => {
-        if (isFailureModalOpen) {
-            console.log("실패했습니다. 모달 띄우기 중");
-            return (
-                <div className="modal-overlay">
-                    <div className="modal">
-                        <div className="modal-content">
-                            <h3>주문에 실패했습니다</h3>
-                            <button onClick={handleModalConfirm}>확인</button>
-                        </div>
-                    </div>
-                </div>
-            );
-        } else if (isSuccessModalOpen) {
-            console.log("성공했습니다. 모달 띄우기 중");
-            return (
-                <div className="modal-overlay">
-                    <div className="modal">
-                        <div className="modal-content">
-                            <h3>주문에 성공했습니다</h3>
-                            <button onClick={handleModalConfirm}>확인</button>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-    }
 
     return (
         <div>
@@ -105,7 +81,29 @@ function PayForm({orders}) {
                     <button type="submit" className="btn btn-primary mr-2">주문하기</button>
                 </div>
             </form>
-            {renderModal()};
+            {isSuccessModalOpen && (
+                <div className="modal-overlay">
+                    <div className="modal2">
+                        <div className="modal-content2">
+                            <h3>결제가 성공했습니다</h3>
+                            {}
+                            <button onClick={handleModalConfirm}>확인</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {isFailureModalOpen && (
+                <div className="modal-overlay">
+                    <div className="modal2">
+                        <div className="modal-content2">
+                            <h3>결제가 실패했습니다</h3>
+                            {}
+                            <button onClick={handleModalConfirm}>확인</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 }

@@ -1,14 +1,8 @@
 import React from 'react';
-import {useNavigate} from "react-router-dom";
 
 
 function HomeForm() {
-    const navigate = useNavigate();
 
-
-    const handleDashboardNavigate =() =>{
-        navigate("/dashboard");
-    };
     return (
         <div className="container">
             <ul className="nav nav-pills pull-right">
@@ -19,8 +13,8 @@ function HomeForm() {
                 <h1>ORG-I SHOP</h1>
                 <p className="lead">주문 기능</p>
                 <p>
-                    <a className="btn btn-lg btn-info" href="/order">상품 주문</a>
-                    <button type="button" onClick={handleDashboardNavigate}>모니터링</button>
+                    <a className="btn btn-lg btn-info bdl" href="/order">상품 주문</a>
+                    <a className="btn btn-lg btn-info" href="/dashboard">모니터링</a>
                 </p>
             </div>
 

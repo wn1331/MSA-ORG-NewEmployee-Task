@@ -29,6 +29,7 @@ function OrderForm() {
                 setProductOptions(options);
             } catch (error) {
                 console.error(error);
+                alert("주문에 실패했습니다.");
             }
         }
 
@@ -44,6 +45,7 @@ function OrderForm() {
         } catch (error) {
             console.error(error);
             console.log("주문에 실패했습니다.")
+            alert("주문에 실패했습니다.");
         }
     };
 

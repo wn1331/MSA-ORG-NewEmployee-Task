@@ -11241,3 +11241,26 @@ body {
     font-size: 0.75rem;
     border-radius: 0.375rem !important;
 }
+.center-vertical-line {
+    display: flex;
+    justify-content: space-around;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+.services {
+    display: flex;
+    justify-content: space-between;
+}
+
+.services .service {
+    flex: 1 1 0;
+    text-align: center;
+    display: flex;
+    justify-content: center; /* Horizontal Centering */
+    align-items: center; /* Vertical Centering */
+    font-size: 30px;
+    font-weight: bold;
+}
+.bdl{
+    margin-right: 100px;
+}
