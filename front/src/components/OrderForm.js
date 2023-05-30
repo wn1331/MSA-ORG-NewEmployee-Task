@@ -10,6 +10,21 @@ function OrderForm() {
     const [productOptions, setProductOptions] = useState([]);
     const [orderHistory, setOrderHistory] = useState([]); // New state for order history
 
+    const handleListClick = (order) => (event) => {
+        if(order.payStatus === "결제 실패") {
+            alert("이미 결제 실패된 주문입니다. 다시 주문하세요.");
+            return;
+        }
+        if(order.payStatus === "결제 완료") {
+            alert("이미 결제 성공한 주문입니다.");
+            return;
+        }
+        try{
+            navigate('/payment', {state: order});
+        }catch(error){
+            console.error(error);
+        }
+    }
 
     const handleProductChange = (event) => {
         setSelectedProduct(event.target.value);
@@ -35,7 +50,7 @@ function OrderForm() {
             }
         }
 
-        fetchProductOptions();
+        fetchProductOptions().then(r => {});
 
         async function fetchOrderHistory() {
             try {
@@ -48,7 +63,7 @@ function OrderForm() {
                 alert("주문내역 불러오기 실패");
             }
         }
-        fetchOrderHistory();
+        fetchOrderHistory().then(r => {});
 
     }, []);
 
@@ -112,12 +127,13 @@ function OrderForm() {
             </div>
 
             {/* Order History */}
-            <div className="order-history">
+            <div className="order-history list-container">
                 <h2>주문내역</h2>
                 {orderHistory.length > 0 ? (
                     <ul>
                         {orderHistory.map((order, index) => (
-                            <li key={index} className={"li-flex"}>
+                        <button type="button" className="button-link" key={index} onClick={handleListClick(order)}>
+                            <li className={"li-flex"}>
                                 <p className={"listItem"}>주문번호: {order.orderId}</p>
                                 <p className={"listItem"}>상품명: {order.itemName}</p>
                                 <p className={"listItem"}>주문수량: {order.count}</p>
@@ -125,6 +141,7 @@ function OrderForm() {
                                 <p className={"listItem"}>주문일자: {order.orderDate}</p>
                                 <p className={"listItem"}>주문상태: {order.payStatus}</p>
                             </li>
+                        </button>
                         ))}
                     </ul>
                 ) : (
