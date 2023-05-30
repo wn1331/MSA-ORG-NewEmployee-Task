@@ -87,7 +87,7 @@ function PayForm({orders}) {
                         <div className="modal-content2">
                             <h3>결제가 성공했습니다</h3>
                             {}
-                            <button onClick={handleModalConfirm}>확인</button>
+                            <button className={"btn btn-lg btn-info"} onClick={handleModalConfirm}>확인</button>
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@ function PayForm({orders}) {
                         <div className="modal-content2">
                             <h3>결제가 실패했습니다</h3>
                             {}
-                            <button onClick={handleModalConfirm}>확인</button>
+                            <button className={"btn btn-lg btn-info"} onClick={handleModalConfirm}>확인</button>
                         </div>
                     </div>
                 </div>

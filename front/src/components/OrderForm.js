@@ -38,6 +38,10 @@ function OrderForm() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (count <= 0) {
+            alert("0개 이하는 주문할 수 없습니다");
+            return;
+        }
         try {
             const response = await axios.post('/api1/v1/orders', {itemName, count});
             const orderData = response.data;
