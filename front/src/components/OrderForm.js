@@ -7,6 +7,7 @@ function OrderForm() {
     const [count, setQuantity] = useState('');
     const navigate = useNavigate();
     const [productOptions, setProductOptions] = useState([]);
+    const [orderHistory, setOrderHistory] = useState([]); // New state for order history
 
 
     const handleProductChange = (event) => {
@@ -34,12 +35,29 @@ function OrderForm() {
         }
 
         fetchProductOptions();
+
+        async function fetchOrderHistory() {
+            try {
+                const response = await axios.get('/api1/v1/orders');
+                const orders = response.data;
+                setOrderHistory(orders);
+            }catch (error) {
+                console.error(error);
+                alert("주문내역 불러오기 실패");
+            }
+        }
+        fetchOrderHistory();
+
     }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if(itemName === '') {
+            alert("주문 상품을 선택하세요.");
+            return;
+        }
         if (count <= 0) {
-            alert("0개 이하는 주문할 수 없습니다");
+            alert("0개 이하는 주문할 수 없습니다.");
             return;
         }
         try {
@@ -90,6 +108,24 @@ function OrderForm() {
                     <button type="submit" className="btn btn-primary">주문하기</button>
                 </form>
             </div>
+
+            {/* Order History */}
+            <div className="order-history">
+                <h2>주문내역</h2>
+                {orderHistory.length > 0 ? (
+                    <ul>
+                        {orderHistory.map((order, index) => (
+                            <li key={index}>
+                                <p>상품명: {order.itemName}</p>
+                                <p>주문수량: {order.count}</p>
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>No orders yet.</p>
+                )}
+            </div>
+
 
             <div className="footer">
                 <p>ORG-I Shop</p>
