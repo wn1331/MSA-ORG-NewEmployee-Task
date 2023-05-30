@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import "../style/OrderForm.css";
 
 function OrderForm() {
     const [itemName, setSelectedProduct] = useState('');
@@ -41,6 +42,7 @@ function OrderForm() {
                 const response = await axios.get('/api1/v1/orders');
                 const orders = response.data;
                 setOrderHistory(orders);
+                console.log(orders);
             }catch (error) {
                 console.error(error);
                 alert("주문내역 불러오기 실패");
@@ -72,8 +74,8 @@ function OrderForm() {
     };
 
     return (
-        <div className="container">
-            <header>
+        <div>
+            <header className="container">
                 <nav className="nav nav-pills pull-right">
                     <ul className="nav nav-pills pull-right">
                         <li><a href="/">Home</a></li>
@@ -83,7 +85,7 @@ function OrderForm() {
                     <h3 className="text-muted">ORG-I SHOP</h3>
                 </a>
             </header>
-            <div className="jumbotron">
+            <div className="container jumbotron">
                 <h1>상품 주문</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
@@ -115,14 +117,18 @@ function OrderForm() {
                 {orderHistory.length > 0 ? (
                     <ul>
                         {orderHistory.map((order, index) => (
-                            <li key={index}>
-                                <p>상품명: {order.itemName}</p>
-                                <p>주문수량: {order.count}</p>
+                            <li key={index} className={"li-flex"}>
+                                <p className={"listItem"}>주문번호: {order.orderId}</p>
+                                <p className={"listItem"}>상품명: {order.itemName}</p>
+                                <p className={"listItem"}>주문수량: {order.count}</p>
+                                <p className={"listItem"}>가격: {order.totalPrice}</p>
+                                <p className={"listItem"}>주문일자: {order.orderDate}</p>
+                                <p className={"listItem"}>주문상태: {order.payStatus}</p>
                             </li>
                         ))}
                     </ul>
                 ) : (
-                    <p>No orders yet.</p>
+                    <p>주문이 존재하지 않습니다..</p>
                 )}
             </div>
 
