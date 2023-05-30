@@ -106,8 +106,8 @@ function DashBoard(){
                                 </div>
                                 <div className="card-body">
                                     <iframe
-                                        src="http://localhost/d-solo/v5ciIbUZz/postgresql-exporter?orgId=1&refresh=1m&theme=light&panelId=176"
-                                        width="100%" height="200" frameBorder="0" title={'2214'}></iframe>
+                                        src="http://localhost/d-solo/v5ciIbUZz/postgresql-exporter?orgId=1&refresh=1m&theme=light&panelId=152"
+                                        width="100%" height="200" frameBorder="0" title={"ex"}></iframe>
                                 </div>
                             </div>
                         </div>
@@ -133,29 +133,29 @@ function DashBoard(){
                     <div className="col-xl-3 col-md-6">
                         <div className="card mb-4">
                             <iframe
-                                src="http://localhost/d-solo/v5ciIbUZz/postgresql-exporter?orgId=1&refresh=1m&theme=light&panelId=169"
-                                width="450" height="200" frameBorder="0" title={'22a252'}></iframe>
+                                src="http://localhost/d-solo/v5ciIbUZz/postgresql-exporter?orgId=1&refresh=1m&theme=light&panelId=145"
+                                width="100%" height="200" frameBorder="0" title={"a1"}></iframe>
                         </div>
                     </div>
                     <div className="col-xl-3 col-md-6">
                         <div className="card mb-4">
                             <iframe
                                 src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&theme=light&panelId=16"
-                                width="450" height="200" frameBorder="0" title={"a2"}></iframe>
+                                width="100%" height="200" frameBorder="0" title={"a2"}></iframe>
                         </div>
                     </div>
                     <div className="col-xl-3 col-md-6">
                         <div className="card mb-4">
                             <iframe
                                 src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&theme=light&panelId=20"
-                                width="450" height="200" frameBorder="0" title={"3a"}></iframe>
+                                width="100%" height="200" frameBorder="0" title={"3a"}></iframe>
                         </div>
                     </div>
                     <div className="col-xl-3 col-md-6">
                         <div className="card mb-4">
                             <iframe
                                 src="http://localhost/d-solo/rYdddlPWk/node-exporter-full?orgId=1&refresh=5s&theme=light&panelId=155"
-                                width="450" height="200" frameBorder="0" title={'251'}></iframe>
+                                width="100%" height="200" frameBorder="0" title={'251'}></iframe>
                         </div>
                     </div>
                 </div>
