@@ -1,14 +1,13 @@
 package com.shop.pay.domain.bank;
 
 import com.shop.pay.domain.BaseEntity;
-import com.shop.pay.global.error.PaymentErrorCode;
 import com.shop.pay.global.error.exception.PaymentException;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import static com.shop.pay.global.error.PaymentErrorCode.*;
+import static com.shop.pay.global.error.PaymentErrorCode.WITHDRAW_AMOUNT_EXCEEDS_LIMIT;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
