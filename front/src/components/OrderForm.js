@@ -9,19 +9,20 @@ function OrderForm() {
     const navigate = useNavigate();
     const [productOptions, setProductOptions] = useState([]);
     const [orderHistory, setOrderHistory] = useState([]); // New state for order history
+    const [depositHistory, setDepositHistory] = useState([]); // New state for order history
 
     const handleListClick = (order) => (event) => {
-        if(order.payStatus === "결제 실패") {
+        if (order.payStatus === "결제 실패") {
             alert("이미 결제 실패된 주문입니다. 다시 주문하세요.");
             return;
         }
-        if(order.payStatus === "결제 완료") {
+        if (order.payStatus === "결제 완료") {
             alert("이미 결제 성공한 주문입니다.");
             return;
         }
-        try{
+        try {
             navigate('/payment', {state: order});
-        }catch(error){
+        } catch (error) {
             console.error(error);
         }
     }
@@ -50,7 +51,8 @@ function OrderForm() {
             }
         }
 
-        fetchProductOptions().then(r => {});
+        fetchProductOptions().then(r => {
+        });
 
         async function fetchOrderHistory() {
             try {
@@ -58,18 +60,37 @@ function OrderForm() {
                 const orders = response.data;
                 setOrderHistory(orders);
                 console.log(orders);
-            }catch (error) {
+            } catch (error) {
                 console.error(error);
                 alert("주문내역 불러오기 실패");
             }
         }
-        fetchOrderHistory().then(r => {});
+
+        fetchOrderHistory().then(r => {
+        });
+
+
+        async function fetchAccount() {
+            const memberId = 1;
+            try {
+                const response = await axios.get(`/api2/v1/users/${memberId}/balance`);
+                const deposit = response.data;
+                console.log(deposit);
+                setDepositHistory(deposit.deposit);
+            } catch (error) {
+                console.error(error);
+                alert("잔고 불러오기 실패");
+            }
+        }
+
+        fetchAccount().then(r => {
+        });
 
     }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if(itemName === '') {
+        if (itemName === '') {
             alert("주문 상품을 선택하세요.");
             return;
         }
@@ -124,6 +145,9 @@ function OrderForm() {
 
                     <button type="submit" className="btn btn-primary">주문하기</button>
                 </form>
+                <p className="text-right" style={{ fontFamily: 'Arial', fontSize: '18px', fontWeight: 'bold' }}>
+                    현재 잔고: {depositHistory} 원
+                </p>
             </div>
 
             {/* Order History */}
@@ -132,24 +156,22 @@ function OrderForm() {
                 {orderHistory.length > 0 ? (
                     <ul>
                         {orderHistory.map((order, index) => (
-                        <button type="button" className="button-link" key={index} onClick={handleListClick(order)}>
-                            <li className={"li-flex"}>
-                                <p className={"listItem"}>주문번호: {order.orderId}</p>
-                                <p className={"listItem"}>상품명: {order.itemName}</p>
-                                <p className={"listItem"}>주문수량: {order.count}</p>
-                                <p className={"listItem"}>가격: {order.totalPrice}</p>
-                                <p className={"listItem"}>주문일자: {order.orderDate}</p>
-                                <p className={"listItem"}>주문상태: {order.payStatus}</p>
-                            </li>
-                        </button>
+                            <button type="button" className="button-link" key={index} onClick={handleListClick(order)}>
+                                <li className={"li-flex"}>
+                                    <p className={"listItem"}>주문번호: {order.orderId}</p>
+                                    <p className={"listItem"}>상품명: {order.itemName}</p>
+                                    <p className={"listItem"}>주문수량: {order.count}</p>
+                                    <p className={"listItem"}>가격: {order.totalPrice}</p>
+                                    <p className={"listItem"}>주문일자: {order.orderDate}</p>
+                                    <p className={"listItem"}>주문상태: {order.payStatus}</p>
+                                </li>
+                            </button>
                         ))}
                     </ul>
                 ) : (
                     <p>주문이 존재하지 않습니다..</p>
                 )}
             </div>
-
-
             <div className="footer">
                 <p>ORG-I Shop</p>
             </div>
