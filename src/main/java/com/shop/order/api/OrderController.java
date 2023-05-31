@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api1/v1")
@@ -24,10 +23,6 @@ public class OrderController {
 
     @GetMapping("/orders")
     public ResponseEntity<List<OrderResponseDto>> getOrderItems() {
-        List<OrderResponseDto> response = orderService.getOrderItems().stream()
-                .map(OrderResponseDto::toDto)
-                .collect(Collectors.toList());
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(orderService.getOrderItems());
     }
 }
