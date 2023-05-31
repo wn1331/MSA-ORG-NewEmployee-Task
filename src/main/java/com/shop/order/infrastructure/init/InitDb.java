@@ -22,9 +22,9 @@ public class InitDb {
     }
 
     private void createItem() {
-        CreateItemRequestDto request1 = new CreateItemRequestDto("스프링", 50000, 10);
-        CreateItemRequestDto request2 = new CreateItemRequestDto("카프카", 30000, 5);
-        CreateItemRequestDto request3 = new CreateItemRequestDto("리액트", 10000, 1);
+        CreateItemRequestDto request1 = new CreateItemRequestDto("구두", 50000, 10);
+        CreateItemRequestDto request2 = new CreateItemRequestDto("운동화", 30000, 5);
+        CreateItemRequestDto request3 = new CreateItemRequestDto("슬리퍼", 10000, 1);
         itemService.createItem(request1);
         itemService.createItem(request2);
         itemService.createItem(request3);
