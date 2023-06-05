@@ -1,0 +1,11 @@
+docker-compose 파일에서 prometheus 컨테이너의 volume을 서비스 내부에 있는 prometheus.yml파일과 연동하려면 <서비스의 prometheus.yml절대주소>:</etc/prometheus/prometheus.yml> 로 변경해야 한다.
+grafana도 마찬가지로 컨테이너의 volume을 서비스 내부의 prometheus.yml파일과 연동해야 한다.
+
+
+grafana의 iframe을 갖고 오려면 grafana에서 세팅을 바꾸어 주어야 한다.(환경설정-권한)?
+아래 블로그 참조
+https://blog.naver.com/PostView.naver?blogId=pcmola&logNo=222368776526&categoryNo=48&parentCategoryNo=0&viewDate=&currentPage=1&postListTopCurrentPage=1&from=search
+
+도커 컨테이너의 grafana.ini 파일 경로
+/home/docker/grafana/grafana.ini
+
