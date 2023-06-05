@@ -1,0 +1,40 @@
+.order-history {
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.order-history ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.order-history button {
+    text-align: left;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.order-history li {
+    border: 1px solid #ddd;
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.order-history li p {
+    margin: 0;
+}
+.list-container{
+    width: 70%;
+    margin: 0 auto;
+}
+
+.deposit-position {
+    margin-right: auto;
+}
